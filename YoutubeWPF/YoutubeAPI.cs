@@ -16,9 +16,7 @@ namespace YoutubeWPF
     {
         private static YouTubeService ytService = Auth();
 
-
-
-        private static YouTubeService Auth()
+        public static YouTubeService Auth()
         {
             UserCredential credential;
             using (var stream = new FileStream(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName + " //client_secret.json", FileMode.Open, FileAccess.Read))
@@ -60,23 +58,6 @@ namespace YoutubeWPF
             return videos;
         }
 
-        internal static Video[] SearchVideo(string keyword)
-        {
-            var request = ytService.Search.List("snippet");
-            request.Q = keyword;
-            request.MaxResults = 50;
-            var response = request.Execute();
 
-            Video[] videos = new Video[response.Items.Count];
-
-            int i = 0;
-            foreach (var item in response.Items)
-            {
-                videos[i++] = item.Snippet
-            }
-
-
-            return videos;
-        }
     }
 }
