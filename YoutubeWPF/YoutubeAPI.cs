@@ -41,13 +41,13 @@ namespace YoutubeWPF
             return youtubeService;
         }
         //Get User's List Of Private and Public Playlists
-        internal static string[][] GetPlaylists()
+        internal static Playlist[] GetPlaylists()
         {
             var request = ytService.Playlists.List("contentDetails,snippet"); //Type of info to request for
             request.Mine = true; //Setting Playlists to come from user
             var PlaylistResponse = request.Execute(); 
 
-            string[][] playlists = new string[PlaylistResponse.Items.Count][]; //To Hold Playlist Info
+            Playlist[] playlists = new Playlist[PlaylistResponse.Items.Count]; //To Hold Playlist Info
 
             int i = 0;
             foreach (var Playlist in PlaylistResponse.Items) {
