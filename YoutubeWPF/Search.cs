@@ -25,7 +25,10 @@ namespace YoutubeWPF
             int i = 0;
             foreach (var item in response.Items)
             {
-                videos[i++] = item.Snippet
+                videos[i].channelId = item.Snippet.ChannelId;
+                videos[i].videoId = ""+item.Id;
+
+                i = i++;
             }
 
 
