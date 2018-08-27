@@ -1,0 +1,27 @@
+﻿<Window x:Class="YoutubeWPF.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:YoutubeWPF"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal"
+        TextOptions.TextRenderingMode="Auto"
+        Background="{DynamicResource MaterialDesignPaper}"
+        FontFamily="{DynamicResource MaterialDesignFont}"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="704.559" Width="953.529">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <DockPanel VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+            <StackPanel DockPanel.Dock="Top" Height="60" Background="#A5D6A7" />
+            <StackPanel DockPanel.Dock="Left" Width="200" Background="#FAFAFA"/>
+            <StackPanel DockPanel.Dock="Right"/>
+        </DockPanel>
+        <TextBlock HorizontalAlignment="Left" Margin="785,-142,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top"/>
+    </Grid>
+</Window>
