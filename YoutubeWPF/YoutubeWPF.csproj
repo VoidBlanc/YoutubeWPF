@@ -97,6 +97,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Search.cs" />
     <Compile Include="Video.cs" />
     <Compile Include="YoutubeAPI.cs" />
     <Page Include="MainWindow.xaml">
