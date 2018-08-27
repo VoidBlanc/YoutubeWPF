@@ -40,24 +40,40 @@ namespace YoutubeWPF
 
             return youtubeService;
         }
-
-        internal static string[] GetPlaylist()
+        //Get User's List Of Private and Public Playlists
+        internal static string[][] GetPlaylists()
         {
-            var request = ytService.PlaylistItems.List("contentDetails");
-            request.PlaylistId = "RDTJJVNrrCgw0";
-            var response = request.Execute();
+            var request = ytService.Playlists.List("contentDetails,snippet"); //Type of info to request for
+            request.Mine = true; //Setting Playlists to come from user
+            var PlaylistResponse = request.Execute(); 
 
-            string[] videos = new string[response.Items.Count];
+            string[][] playlists = new string[PlaylistResponse.Items.Count][]; //To Hold Playlist Info
 
             int i = 0;
-            foreach (var item in response.Items)
-            {
-                videos[i++] = "" + item.ContentDetails.VideoId;
+            foreach (var Playlist in PlaylistResponse.Items) {
+                //Get Playlist Info
+                Console.Write("Playlist: " + Playlist.Snippet.Title.ToString());
+                Console.Write("| Amt Of Videos:"  + Playlist.ContentDetails.ItemCount);
+                Console.WriteLine("| Video Thumbnail:" + Playlist.Snippet.Thumbnails.Standard.Url.ToString()); //Get Video Thumbnail
+                //playlists[i] = Playlist.ContentDetails;
+                GetPlaylistVideos(Playlist.Id);
             }
-
-            return videos;
+            return playlists;
         }
 
+        //Get Videos From Playlist
+        internal static string[] GetPlaylistVideos(String playlistId)
+        {
+            var request = ytService.PlaylistItems.List("contentDetails,snippet");
+            request.PlaylistId = playlistId;
+            var VideosResponse = request.Execute();
+            string[] videos = new string[VideosResponse.Items.Count];
+            foreach (var video in VideosResponse.Items)
+            {
+                Console.WriteLine("Video Title: " + video.Snippet.Title.ToString());
+            }
+            return videos;
+        }
 
     }
 }

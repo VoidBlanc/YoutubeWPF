@@ -34,7 +34,7 @@ namespace YoutubeWPF
         public MainWindow()
         {
             InitializeComponent();
-            //string[] str = YoutubeAPI.GetPlaylist();
+            Playlist[] playlists = YoutubeAPI.GetPlaylists();
             //Console.WriteLine(str[0]);
 
         }
