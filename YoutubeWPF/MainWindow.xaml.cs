@@ -34,12 +34,23 @@ namespace YoutubeWPF
         public MainWindow()
         {
             InitializeComponent();
-            Playlist[] playlists = YoutubeAPI.GetPlaylists();
+            Queue<Playlist> playlists = YoutubeAPI.GetPlaylists();
             //Console.WriteLine(str[0]);
-
+            while (playlists.Count > 0)
+            {
+                Playlist pl = playlists.Dequeue();
+                //Image playlistThumbnail = new Image();
+                //playlistThumbnail.Source = new BitmapImage(new Uri(pl.thumbnail,UriKind.Absolute));
+                TextBlock plTitle = new TextBlock();
+                plTitle.Text = pl.title;
+                playlistViewer.Children.Add(plTitle);
+            }    
         }
 
-
+        public static void displayInfo(object sender, MouseButtonEventArgs e)
+        {
+            
+        }
 
 
     }
