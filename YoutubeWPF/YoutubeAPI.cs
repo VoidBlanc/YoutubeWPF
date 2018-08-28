@@ -41,13 +41,13 @@ namespace YoutubeWPF
             return youtubeService;
         }
         //Get User's List Of Private and Public Playlists
-        internal static Queue<Playlist> GetPlaylists()
+        internal static Playlist[] GetPlaylists()
         {
             var request = ytService.Playlists.List("contentDetails,snippet"); //Type of info to request for
             request.Mine = true; //Setting Playlists to come from user
             var PlaylistResponse = request.Execute(); 
 
-            Queue<Playlist> playlists = new Queue<Playlist>(); //To Hold Playlist Info
+            Playlist[] playlists = new Playlist[PlaylistResponse.Items.Count]; //To Hold Playlist Info
 
             int i = 0;
             foreach (var PlaylistItem in PlaylistResponse.Items) {
@@ -56,13 +56,13 @@ namespace YoutubeWPF
                 Console.Write("| Amt Of Videos:"  + PlaylistItem.ContentDetails.ItemCount);
                 Console.WriteLine("| Video Thumbnail:" + PlaylistItem.Snippet.Thumbnails.High.Url.ToString()); //Get Video Thumbnail
                 Playlist pl = new Playlist();
-                pl.thumbnail = PlaylistItem.Snippet.Thumbnails.Standard.Url.ToString();
+                pl.thumbnail = PlaylistItem.Snippet.Thumbnails.Default__.Url;
                 pl.Id = PlaylistItem.Id;
                 pl.amtOfVideos = unchecked((int)PlaylistItem.ContentDetails.ItemCount);
                 pl.description = PlaylistItem.Snippet.Description;
                 pl.title = PlaylistItem.Snippet.Title;
                 pl.channelTitle = PlaylistItem.Snippet.ChannelTitle;
-                playlists.Enqueue(pl);
+                playlists[i++] = pl;
                 //playlists[i] = Playlist.ContentDetails;
                 GetPlaylistVideos(PlaylistItem.Id);
             }

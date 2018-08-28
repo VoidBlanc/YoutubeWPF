@@ -34,9 +34,9 @@ namespace YoutubeWPF
         public MainWindow()
         {
             InitializeComponent();
-            Queue<Playlist> playlists = YoutubeAPI.GetPlaylists();
+            Playlist[] playlists = YoutubeAPI.GetPlaylists();
             //Console.WriteLine(str[0]);
-            while (playlists.Count > 0)
+            /*while (playlists.Length > 0)
             {
                 Playlist pl = playlists.Dequeue();
                 //Image playlistThumbnail = new Image();
@@ -44,7 +44,15 @@ namespace YoutubeWPF
                 TextBlock plTitle = new TextBlock();
                 plTitle.Text = pl.title;
                 playlistViewer.Children.Add(plTitle);
-            }    
+            }    */
+
+            foreach (Playlist pl in playlists) {
+                //Image playlistThumbnail = new Image();
+                //playlistThumbnail.Source = new BitmapImage(new Uri(pl.thumbnail,UriKind.Absolute));
+                TextBlock plTitle = new TextBlock();
+                plTitle.Text = pl.title;
+                playlistViewer.Children.Add(plTitle);
+            }
         }
 
         public static void displayInfo(object sender, MouseButtonEventArgs e)
