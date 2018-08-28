@@ -13,10 +13,10 @@ namespace YoutubeWPF
         private static YouTubeService ytService = YoutubeAPI.Auth();
 
 
-        internal static Video[] SearchVideo(string keyword)
+        public static Video[] SearchVideo(string keyword)
         {
             var request = ytService.Search.List("snippet");
-            request.Q = keyword;
+            request.Q = keyword;    
             request.MaxResults = 50;
             var response = request.Execute();
 
@@ -25,14 +25,19 @@ namespace YoutubeWPF
             int i = 0;
             foreach (var item in response.Items)
             {
-                videos[i].channelId = item.Snippet.ChannelId;
-                videos[i].videoId = ""+item.Id;
-
+                videos[i].ChannelId = item.Snippet.ChannelId;
+                videos[i].Id = ""+item.Id;
+                videos[i].Thumbnail = item.Snippet.Thumbnails.Default__.Url;
+                var viewCountRequest = ytService.Videos.List("statistics");
+                viewCountRequest.Id = "" + item.Id;
+                var viewCountResponse = viewCountRequest.Execute();
+                videos[i].ViewCount = (long)viewCountResponse.Items[0].Statistics.ViewCount;
                 i = i++;
             }
 
 
             return videos;
         }
+
     }
 }

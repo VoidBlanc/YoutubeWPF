@@ -14,6 +14,6 @@ namespace YoutubeWPF
         public string Title { get; set; }
         public string Description { get; set; } //Keep for now incase user wants to view video(Saves time on retrieving it again)
         public string Thumbnail { get; set; } // To get thumbnail URL
-        public int ViewCount { get; set; }
+        public long ViewCount { get; set; }
     }
 }
