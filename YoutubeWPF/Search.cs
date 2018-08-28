@@ -32,6 +32,7 @@ namespace YoutubeWPF
                 viewCountRequest.Id = "" + item.Id;
                 var viewCountResponse = viewCountRequest.Execute();
                 videos[i].ViewCount = (long)viewCountResponse.Items[0].Statistics.ViewCount;
+
                 i = i++;
             }
 
