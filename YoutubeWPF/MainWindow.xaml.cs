@@ -60,6 +60,13 @@ namespace YoutubeWPF
             
         }
 
+        private void TextBox_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.Key != System.Windows.Input.Key.Enter) return;
 
+            // your event handler here
+            e.Handled = true;
+            MessageBox.Show("Enter pressed");
+        }
     }
 }
