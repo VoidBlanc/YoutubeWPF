@@ -30,34 +30,40 @@ namespace YoutubeWPF
     /// </summary>
     public partial class MainWindow : Window
     {
-
+        private Playlist[] playlists;
         public MainWindow()
         {
             InitializeComponent();
-            Playlist[] playlists = YoutubeAPI.GetPlaylists();
-            //Console.WriteLine(str[0]);
-            /*while (playlists.Length > 0)
-            {
-                Playlist pl = playlists.Dequeue();
-                //Image playlistThumbnail = new Image();
-                //playlistThumbnail.Source = new BitmapImage(new Uri(pl.thumbnail,UriKind.Absolute));
-                TextBlock plTitle = new TextBlock();
-                plTitle.Text = pl.title;
-                playlistViewer.Children.Add(plTitle);
-            }    */
-
-            foreach (Playlist pl in playlists) {
-                //Image playlistThumbnail = new Image();
-                //playlistThumbnail.Source = new BitmapImage(new Uri(pl.thumbnail,UriKind.Absolute));
-                TextBlock plTitle = new TextBlock();
-                plTitle.Text = pl.title;
+            this.playlists = YoutubeAPI.GetPlaylists();        
+            for (int i = 0; i < playlists.Length;i++) {
+                Playlist pl = playlists[i];
+                Button plTitle = new Button();
+                plTitle.Content = pl.title;
+                plTitle.MinWidth = 300.00;
+                plTitle.MaxWidth = 300.00;
+                plTitle.Tag = i;
+                plTitle.Click += displayInfo;
                 playlistViewer.Children.Add(plTitle);
             }
         }
 
-        public static void displayInfo(object sender, MouseButtonEventArgs e)
+        private void displayInfo(object sender, RoutedEventArgs e)
         {
-            
+            Playlist pl = playlists[(int)((Button)sender).Tag];
+            String playlistId = (String)pl.Id;
+
+            Video[] videos = YoutubeAPI.GetPlaylistVideos(playlistId);
+
+            Image playlistThumbnail = new Image();
+            playlistThumbnail.Source = new BitmapImage(new Uri(pl.thumbnail, UriKind.Absolute));
+            UCPanel.Children.Clear();
+            foreach (Video vid in videos)
+            {
+                PlaylistHeaderDisplayUC plUC = new PlaylistHeaderDisplayUC();
+                plUC.playlistThumbnail.Source = new BitmapImage(new Uri(vid.Thumbnail, UriKind.Absolute));
+                plUC.playlistTitle.Text = vid.Title;
+                UCPanel.Children.Add(plUC);
+            }
         }
 
         private void TextBox_KeyUp(object sender, KeyEventArgs e)
@@ -68,7 +74,6 @@ namespace YoutubeWPF
             e.Handled = true;
             MessageBox.Show("Enter pressed");
             Video[] searchvid = Search.SearchVideo(searchField.Text);
-
             Console.WriteLine("Search Video ID: " + searchvid[0].Id);
         }
     }

@@ -26,15 +26,12 @@
                     </TextBox.BindingGroup>
                 </TextBox>
             </StackPanel>
-            <StackPanel DockPanel.Dock="Left" Width="200" Background="#FAFAFA" Height="615" Margin="0,0,0,0.2" VerticalAlignment="Bottom">
-                <ScrollViewer Height="615">
-                    <StackPanel x:Name="playlistViewer">
-                       
-                    </StackPanel>
-                </ScrollViewer>
-            </StackPanel>
-            <StackPanel DockPanel.Dock="Right"/>
+            <ScrollViewer DockPanel.Dock="Left" Height="615" Width="200" Background="#FAFAFA" Margin="0,0,0,0.2" VerticalAlignment="Bottom">
+                <StackPanel x:Name="playlistViewer" Width="190">
+                    
+                </StackPanel>
+            </ScrollViewer>
+            <StackPanel x:Name="UCPanel" DockPanel.Dock="Right"/>
         </DockPanel>
-        <TextBlock HorizontalAlignment="Left" Margin="785,-142,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top"/>
     </Grid>
 </Window>

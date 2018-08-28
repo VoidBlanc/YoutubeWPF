@@ -52,33 +52,42 @@ namespace YoutubeWPF
             int i = 0;
             foreach (var PlaylistItem in PlaylistResponse.Items) {
                 //Get Playlist Info
-                Console.Write("Playlist: " + PlaylistItem.Snippet.Title.ToString());
-                Console.Write("| Amt Of Videos:"  + PlaylistItem.ContentDetails.ItemCount);
-                Console.WriteLine("| Video Thumbnail:" + PlaylistItem.Snippet.Thumbnails.High.Url.ToString()); //Get Video Thumbnail
                 Playlist pl = new Playlist();
-                pl.thumbnail = PlaylistItem.Snippet.Thumbnails.Default__.Url;
+                pl.thumbnail = PlaylistItem.Snippet.Thumbnails.Medium.Url;
                 pl.Id = PlaylistItem.Id;
                 pl.amtOfVideos = unchecked((int)PlaylistItem.ContentDetails.ItemCount);
                 pl.description = PlaylistItem.Snippet.Description;
                 pl.title = PlaylistItem.Snippet.Title;
                 pl.channelTitle = PlaylistItem.Snippet.ChannelTitle;
-                playlists[i++] = pl;
+                playlists[i] = pl;
+                i++;
                 //playlists[i] = Playlist.ContentDetails;
-                GetPlaylistVideos(PlaylistItem.Id);
             }
             return playlists;
         }
 
         //Get Videos From Playlist
-        internal static string[] GetPlaylistVideos(String playlistId)
+        internal static Video[] GetPlaylistVideos(String playlistId)
         {
+            //ytService.Videos.List("statistics,contentDetails,snippet");
             var request = ytService.PlaylistItems.List("contentDetails,snippet");
             request.PlaylistId = playlistId;
+
             var VideosResponse = request.Execute();
-            string[] videos = new string[VideosResponse.Items.Count];
-            foreach (var video in VideosResponse.Items)
+            Video[] videos = new Video[VideosResponse.Items.Count];
+
+            int i = 0;
+            foreach (var videoItem in VideosResponse.Items)
             {
-                Console.WriteLine("Video Title: " + video.Snippet.Title.ToString());
+                Video vid = new Video();
+                vid.Id = videoItem.Id;
+                vid.Title = videoItem.Snippet.Title;
+                vid.Description = videoItem.Snippet.Description;
+                vid.ChannelTitle = videoItem.Snippet.ChannelTitle;
+                vid.ChannelId = videoItem.Snippet.ChannelId;
+                vid.Thumbnail = videoItem.Snippet.Thumbnails.Medium.Url.ToString();
+                videos[i] = vid;
+                i++;
             }
             return videos;
         }
