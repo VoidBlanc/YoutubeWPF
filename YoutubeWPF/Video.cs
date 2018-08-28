@@ -9,10 +9,11 @@ namespace YoutubeWPF
     class Video
     {
         public string Id { get; set; }
-        public string channelId { get; set; }
-        public string channelTitle { get; set; }
-        public string title { get; set; }
-        public string description { get; set; } //Keep for now incase user wants to view video(Saves time on retrieving it again)
-        public string thumbnail { get; set; }
+        public string ChannelId { get; set; }
+        public string ChannelTitle { get; set; }
+        public string Title { get; set; }
+        public string Description { get; set; } //Keep for now incase user wants to view video(Saves time on retrieving it again)
+        public string Thumbnail { get; set; } // To get thumbnail URL
+        public int ViewCount { get; set; }
     }
 }
