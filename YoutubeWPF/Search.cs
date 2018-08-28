@@ -25,19 +25,51 @@ namespace YoutubeWPF
             int i = 0;
             foreach (var item in response.Items)
             {
-                videos[i].ChannelId = item.Snippet.ChannelId;
-                videos[i].Id = ""+item.Id;
+
+                switch (item.Id.Kind)
+                {
+                    case "youtube#video":
+                        Video vid = new Video();
+                        vid.Id = item.Id.VideoId;
+                        vid.ViewCount = GetViewCount(item.Id.VideoId);
+                        videos[i] = vid;
+                        break;
+
+                    case "youtube#channel":
+                        Video vidchan = new Video();
+                        vidchan.Id = item.Id.ChannelId;
+                        videos[i] = vidchan;
+                        break;
+
+                    case "youtube#playlist":
+                       
+                        break;
+                }
+
                 videos[i].Thumbnail = item.Snippet.Thumbnails.Default__.Url;
-                var viewCountRequest = ytService.Videos.List("statistics");
-                viewCountRequest.Id = "" + item.Id;
-                var viewCountResponse = viewCountRequest.Execute();
-                videos[i].ViewCount = (long)viewCountResponse.Items[0].Statistics.ViewCount;
 
                 i = i++;
             }
 
 
             return videos;
+        }
+
+        internal static long GetViewCount(string vidid)
+        {
+            long result = 0;
+            var viewCountRequest = ytService.Videos.List("statistics");
+            viewCountRequest.Id = vidid;
+            var viewCountResponse = viewCountRequest.Execute();
+            int[] videos = new int[viewCountResponse.Items.Count];
+            //Below error
+            int i = 0;
+            foreach (var item in viewCountResponse.Items)
+            {
+                result = (long)item.Statistics.ViewCount;
+                i = i++;
+            }
+            return result;
         }
 
     }

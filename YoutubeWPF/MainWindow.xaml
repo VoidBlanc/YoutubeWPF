@@ -20,7 +20,11 @@
         </Grid.ColumnDefinitions>
         <DockPanel VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
             <StackPanel DockPanel.Dock="Top" Height="60" Background="#A5D6A7" >
-                <TextBox Height="58" TextWrapping="Wrap" Text="TextBox" Margin="396,0,0,0" KeyUp="TextBox_KeyUp" Background="White"/>
+                <TextBox Height="58" TextWrapping="Wrap" Margin="396,0,0,0" Name="searchField"  KeyUp="TextBox_KeyUp" Background="White">
+                    <TextBox.BindingGroup>
+                        <BindingGroup/>
+                    </TextBox.BindingGroup>
+                </TextBox>
             </StackPanel>
             <StackPanel DockPanel.Dock="Left" Width="200" Background="#FAFAFA" Height="615" Margin="0,0,0,0.2" VerticalAlignment="Bottom">
                 <ScrollViewer Height="615">
