@@ -7,7 +7,7 @@
              xmlns:local="clr-namespace:YoutubeWPF.Search"
              mc:Ignorable="d" Width="601.695" Height="123.989">
     <Grid Background="White" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-        <Image HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="142" Margin="0,0,460,0" Name="videoThumbnail"/>
+        <Image HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="140" Margin="0,0,460,0" Name="videoThumbnail"/>
         <Label Name="videoTitle" Content="Label" HorizontalAlignment="Left" Margin="163,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.951,-0.175" FontWeight="Bold" FontSize="14" Width="429"/>
 
     </Grid>

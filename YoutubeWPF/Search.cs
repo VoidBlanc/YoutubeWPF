@@ -31,18 +31,26 @@ namespace YoutubeWPF
                     case "youtube#video":
                         Video vid = new Video();
                         vid.Id = item.Id.VideoId;
+                        vid.Title = item.Snippet.Title;
                         vid.ViewCount = GetViewCount(item.Id.VideoId);
+                        vid.Type = item.Id.Kind;
                         videos[i] = vid;
                         break;
 
                     case "youtube#channel":
                         Video vidchan = new Video();
                         vidchan.Id = item.Id.ChannelId;
+                        vidchan.Title = item.Snippet.Title;
+                        vidchan.Type = item.Id.Kind;
                         videos[i] = vidchan;
                         break;
 
                     case "youtube#playlist":
-                       
+                        Video vidpl = new Video();
+                        vidpl.Id = item.Id.PlaylistId;
+                        vidpl.Title = item.Snippet.Title;
+                        vidpl.Type = item.Id.Kind;
+                        videos[i] = vidpl;
                         break;
                 }
 

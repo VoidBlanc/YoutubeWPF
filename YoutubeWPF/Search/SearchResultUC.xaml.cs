@@ -12,8 +12,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using YoutubeWPF.Search;
 
-namespace YoutubeWPF.Search
+namespace YoutubeWPF
 
 {
     /// <summary>
@@ -23,7 +24,14 @@ namespace YoutubeWPF.Search
     {
         public SearchResultUC()
         {
+            InitializeComponent();
+        }
 
+        private void loadSearchResult()
+        {
+            ResultCardUC card = new ResultCardUC();
+            
+            // Need to loop and add resutl
         }
     }
 }

@@ -8,8 +8,8 @@
              mc:Ignorable="d" 
              d:DesignHeight="562.185" d:DesignWidth="879.412">
     <Grid Background="White">
-        <StackPanel HorizontalAlignment="Stretch" Margin="0" VerticalAlignment="Stretch">
-
+        <StackPanel HorizontalAlignment="Stretch" Margin="0" VerticalAlignment="Stretch" Name="spBody">
+            
         </StackPanel>
     </Grid>
 </UserControl>
