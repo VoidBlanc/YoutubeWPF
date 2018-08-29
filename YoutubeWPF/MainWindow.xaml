@@ -30,6 +30,7 @@
                 <StackPanel x:Name="playlistViewer" Width="190">
                     
                 </StackPanel>
+               
             </ScrollViewer>
             <StackPanel x:Name="UCPanel" DockPanel.Dock="Right"/>
         </DockPanel>

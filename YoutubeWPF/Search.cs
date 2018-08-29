@@ -8,7 +8,7 @@ using Google.Apis.Util.Store;
 using Google.Apis.YouTube.v3;
 namespace YoutubeWPF
 {
-    class Search
+    class Searches
     {
         private static YouTubeService ytService = YoutubeAPI.Auth();
 

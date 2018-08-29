@@ -13,7 +13,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace YoutubeWPF
+namespace YoutubeWPF.Search
+
 {
     /// <summary>
     /// Interaction logic for SearchResultUC.xaml
@@ -22,7 +23,7 @@ namespace YoutubeWPF
     {
         public SearchResultUC()
         {
-            InitializeComponent();
+
         }
     }
 }

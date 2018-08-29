@@ -92,7 +92,7 @@ namespace YoutubeWPF
             // your event handler here
             e.Handled = true;
             MessageBox.Show("Enter pressed");
-            Video[] searchvid = Search.SearchVideo(searchField.Text);
+            Video[] searchvid = Searches.SearchVideo(searchField.Text);
             Console.WriteLine("Search Video ID: " + searchvid[0].Id);
         }
     }

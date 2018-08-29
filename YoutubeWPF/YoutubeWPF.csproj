@@ -107,7 +107,10 @@
       <DependentUpon>PlaylistVideoDisplayUC.xaml</DependentUpon>
     </Compile>
     <Compile Include="Search.cs" />
-    <Compile Include="SearchResultUC.xaml.cs">
+    <Compile Include="Search\ResultCardUC.xaml.cs">
+      <DependentUpon>ResultCardUC.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Search\SearchResultUC.xaml.cs">
       <DependentUpon>SearchResultUC.xaml</DependentUpon>
     </Compile>
     <Compile Include="Video.cs" />
@@ -132,9 +135,13 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="SearchResultUC.xaml">
-      <SubType>Designer</SubType>
+    <Page Include="Search\ResultCardUC.xaml">
       <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Search\SearchResultUC.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
   <ItemGroup>
