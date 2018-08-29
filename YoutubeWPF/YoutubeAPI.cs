@@ -45,7 +45,10 @@ namespace YoutubeWPF
         {
             var request = ytService.Playlists.List("contentDetails,snippet"); //Type of info to request for
             request.Mine = true; //Setting Playlists to come from user
-            var PlaylistResponse = request.Execute(); 
+            request.MaxResults = 50;
+
+            var PlaylistResponse = request.Execute();
+            //PlaylistResponse.NextPageToken
 
             Playlist[] playlists = new Playlist[PlaylistResponse.Items.Count]; //To Hold Playlist Info
 
@@ -72,6 +75,7 @@ namespace YoutubeWPF
             //ytService.Videos.List("statistics,contentDetails,snippet");
             var request = ytService.PlaylistItems.List("contentDetails,snippet");
             request.PlaylistId = playlistId;
+            request.MaxResults = 50;
 
             var VideosResponse = request.Execute();
             Video[] videos = new Video[VideosResponse.Items.Count];
@@ -83,9 +87,20 @@ namespace YoutubeWPF
                 vid.Id = videoItem.Id;
                 vid.Title = videoItem.Snippet.Title;
                 vid.Description = videoItem.Snippet.Description;
-                vid.ChannelTitle = videoItem.Snippet.ChannelTitle;
-                vid.ChannelId = videoItem.Snippet.ChannelId;
-                vid.Thumbnail = videoItem.Snippet.Thumbnails.Medium.Url.ToString();
+
+                if (videoItem.Snippet.Thumbnails == null)
+                {
+                    //Video is private
+                    vid.Thumbnail = "http://s.ytimg.com/yts/img/no_thumbnail-vfl4t3-4R.jpg";
+                    vid.ChannelId = "";
+                    vid.ChannelTitle = "";
+                }
+                else
+                {
+                    vid.ChannelTitle = videoItem.Snippet.ChannelTitle;
+                    vid.ChannelId = videoItem.Snippet.ChannelId;
+                    vid.Thumbnail = videoItem.Snippet.Thumbnails.Medium.Url.ToString();
+                }
                 videos[i] = vid;
                 i++;
             }

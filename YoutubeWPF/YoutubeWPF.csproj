@@ -103,6 +103,9 @@
     <Compile Include="PlaylistHeaderDisplayUC.xaml.cs">
       <DependentUpon>PlaylistHeaderDisplayUC.xaml</DependentUpon>
     </Compile>
+    <Compile Include="PlaylistVideoDisplayUC.xaml.cs">
+      <DependentUpon>PlaylistVideoDisplayUC.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Search.cs" />
     <Compile Include="SearchResultUC.xaml.cs">
       <DependentUpon>SearchResultUC.xaml</DependentUpon>
@@ -122,6 +125,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="PlaylistHeaderDisplayUC.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PlaylistVideoDisplayUC.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

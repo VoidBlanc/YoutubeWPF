@@ -49,21 +49,40 @@ namespace YoutubeWPF
 
         private void displayInfo(object sender, RoutedEventArgs e)
         {
-            Playlist pl = playlists[(int)((Button)sender).Tag];
-            String playlistId = (String)pl.Id;
-
-            Video[] videos = YoutubeAPI.GetPlaylistVideos(playlistId);
-
-            Image playlistThumbnail = new Image();
-            playlistThumbnail.Source = new BitmapImage(new Uri(pl.thumbnail, UriKind.Absolute));
+            //Clear Panel For Displaying
             UCPanel.Children.Clear();
+
+            //Get Playlist
+            Playlist pl = playlists[(int)((Button)sender).Tag]; 
+            String playlistId = (String)pl.Id; //Playlist id for getting videos of playlist
+
+            //Display Playlist
+            PlaylistHeaderDisplayUC plUC = new PlaylistHeaderDisplayUC();
+            plUC.playlistThumbnail.Source = new BitmapImage(new Uri(pl.thumbnail, UriKind.Absolute));
+            plUC.playlistTitle.Text = pl.title;
+            UCPanel.Children.Add(plUC);
+
+            Video[] videos = YoutubeAPI.GetPlaylistVideos(playlistId); //Retrieve Videos
+            //Video[] videos = YoutubeAPI.GetPlaylistVideos("PL8DN6BZgVqw7F0ovJKx_AXAGyKnG6suW4"); //Testing Purposes
+
+            ScrollViewer sv = new ScrollViewer();
+            sv.CanContentScroll = true;
+
+            StackPanel sp = new StackPanel();
+            sv.Content = sp;
             foreach (Video vid in videos)
             {
-                PlaylistHeaderDisplayUC plUC = new PlaylistHeaderDisplayUC();
-                plUC.playlistThumbnail.Source = new BitmapImage(new Uri(vid.Thumbnail, UriKind.Absolute));
-                plUC.playlistTitle.Text = vid.Title;
-                UCPanel.Children.Add(plUC);
+                //Display Videos In User Control PlaylistVideoDisplayUC
+                
+                PlaylistVideoDisplayUC plvUC = new PlaylistVideoDisplayUC();
+                plvUC.title.Text = vid.Title;
+                plvUC.channel.Text = vid.ChannelTitle;
+                plvUC.thumbnail.Source = new BitmapImage(new Uri(vid.Thumbnail, UriKind.Absolute));
+                plvUC.description.Text = vid.Description;
+
+                sp.Children.Add(plvUC);      
             }
+            UCPanel.Children.Add(sv); //Add To Panel
         }
 
         private void TextBox_KeyUp(object sender, KeyEventArgs e)
